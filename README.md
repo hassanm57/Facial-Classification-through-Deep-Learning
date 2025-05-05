@@ -8,6 +8,31 @@ School of Electrical Engineering and Computer Science (SEECS)
 
 This project is part of Assignment 2 for the CS405 Deep Learning course. The objective is to design and train deep learning models for **facial classification** using CNN architectures and transfer learning. The project also includes performance evaluation through a Kaggle competition.
 
+![output](https://github.com/user-attachments/assets/38dc1ab3-2621-4a90-86e9-309f0196f2a1)
+
+
+## ✂️ Dataset Splitting with RetinaFace
+
+To prepare the dataset for training, validation, and testing, we implemented a **custom data splitter** that uses **RetinaFace** (via InsightFace) for **face detection and cropping**. The splitting process ensures high-quality, standardized facial regions before feeding into the deep learning model.
+
+### 🔧 Setup for Face Detection
+
+We used the `buffalo_l` model from InsightFace, which is accurate and GPU-accelerated:
+
+```python
+!pip install -q insightface
+!pip install -q onnxruntime-gpu
+
+from insightface.app import FaceAnalysis
+
+# Initialize RetinaFace detector
+app = FaceAnalysis(name="buffalo_l")
+app.prepare(ctx_id=0, det_size=(224, 224))  # GPU enabled
+```
+
+![output](https://github.com/user-attachments/assets/0dec04e1-5ee1-438d-a60c-65d2c05927b9)
+
+
 ## 📂 Provided Materials
 
 - Training data (`train/`): 140,000+ facial images across 7000 identities.
